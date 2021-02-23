@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Slider</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="select_container">
+            <input type="radio" name="color" id="Tcolor" checked />
+                <label for="Tcolor">Color</label>
+            <input type="radio" name="color" id="BGcolor"/>
+                <label for="BGcolor">backgroundColor</label>
+        </div>
+        <div class="piker-container">
+            <div class="sliders">
+                <div class="red"></div>
+                <p class="re">255</p>
+                <div class="green"></div>
+                <p class="ge">255</p>
+                <div class="blue"></div>
+                <p class="bl">255</p>
+            </div>
+            
+            <div class="text-block">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem alias consequatur </p>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        $( function() {
+            $( "input").checkboxradio({icon: false});
+           
+
+            function update() {
+                var red_value = $('.red').slider('value');                
+                var green_value = $('.green').slider('value');
+                var blue_value = $('.blue').slider('value');
+                
+                $(".red>.ui-slider-range").css('background-color', 'rgb('+red_value+ ', 0,0 )');
+                $(".red>.ui-state-default").css('border-color', 'rgb('+red_value+ ', 0,0 )');
+                $(".green>.ui-slider-range ").css('background-color', 'rgb(0, '+green_value+ ', 0 )');
+                $(".green>.ui-state-default").css('border-color', 'rgb(0, '+green_value+ ', 0 )');
+                $(".blue>.ui-slider-range ").css('background-color', 'rgb(0, 0, '+blue_value+ ')');
+                $(".blue>.ui-state-default").css('border-color', 'rgb(0, 0, '+blue_value+ ')');
+
+                if ($(".select_container :radio:checked").attr('id') === 'Tcolor'){
+                    $(".text-block>p").css("color", "rgb(" + red_value + "," + green_value + "," + blue_value + ")");
+                } else {
+                    $(".text-block").css("background-color", "rgb(" + red_value + "," + green_value + "," + blue_value + ")");
+                }
+            
+                $(".re").text(red_value);
+                $(".ge").text(green_value);
+                $(".bl").text(blue_value);
+        
+            }
+              
+
+            $(".red").slider({
+                range: "min",
+                value: 255,
+                min: 1,
+                max: 255,
+                slide: function(event, ui) {
+                    
+                    update();
+            
+                }
+            });
+
+            $(".green").slider({
+                range: "min",
+                value: 100,
+                min: 1,
+                max: 255,
+                slide: function(event, ui) {
+                    
+                     update();
+                }
+            });
+
+            $(".blue").slider({
+                range: "min",
+                value: 255,
+                min: 1,
+                max: 255,
+                slide: function(event, ui) {
+                    
+                     update();
+                }
+                });
+
+            update(); 
+        } );
+     </script>
+    
+</body>
+</html>
